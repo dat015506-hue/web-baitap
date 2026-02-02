@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Đèn Kéo Quân</title>
+
+<style>
+body {
+    background: #f2f2f2;
+    text-align: center;
+    font-family: Arial;
+}
+
+.scene {
+    width: 300px;
+    height: 200px;
+    margin: 60px auto;
+    perspective: 1200px;
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.carousel img {
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 6 mặt đèn */
+.carousel img:nth-child(1) { transform: rotateY(0deg) translateZ(400px); }
+.carousel img:nth-child(2) { transform: rotateY(60deg) translateZ(400px); }
+.carousel img:nth-child(3) { transform: rotateY(120deg) translateZ(400px); }
+.carousel img:nth-child(4) { transform: rotateY(180deg) translateZ(400px); }
+.carousel img:nth-child(5) { transform: rotateY(240deg) translateZ(400px); }
+.carousel img:nth-child(6) { transform: rotateY(300deg) translateZ(400px); }
+</style>
+</head>
+
+<body>
+
+<h2>Đèn Kéo Quân (Hover để dừng)</h2>
+
+<div class="scene">
+    <div class="carousel" id="carousel">
+        <img src="anh1.jpg">
+        <img src="anh2.jpg">
+        <img src="anh3.jpg">
+        <img src="anh4.jpg">
+        <img src="anh5.jpg">
+        <img src="anh6.jpg">
+    </div>
+</div>
+
+<script>
+let carousel = document.getElementById("carousel");
+let images = document.querySelectorAll(".carousel img");
+
+let angle = 0;
+let timer;
+
+// quay đèn
+function start() {
+    timer = setInterval(() => {
+        angle += 1;
+        carousel.style.transform = "rotateY(" + angle + "deg)";
+    }, 30);
+}
+
+// dừng
+function stop() {
+    clearInterval(timer);
+}
+
+// chạy khi mở trang
+start();
+
+// hover để dừng
+images.forEach(img => {
+    img.onmouseenter = stop;
+    img.onmouseleave = start;
+});
+</script>
+
+</body>
+</html>
+
